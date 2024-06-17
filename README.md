@@ -32,7 +32,7 @@ Add configuration under the `abiExporter` key:
 | `except` | `Array` of `String` matchers used to exclude contracts | `[]` |
 | `spacing` | number of spaces per indentation level of formatted output | `2` |
 | `pretty` | whether to use interface-style formatting of output for better readability | `false` |
-| `format` | format type ("json", "minimal", "fullName"). Alternative to `pretty` | `json` |
+| `format` | format type ("json", "minimal", "fullName", "typescript"). Alternative to `pretty` | `json` |
 | `filter` | `Function` with signature `(abiElement: any, index: number, abi: any, fullyQualifiedName: string) => boolean` used to filter elements from each exported ABI | `() => true` |
 | `rename` | `Function` with signature `(sourceName: string, contractName: string) => string` used to rename an exported ABI (incompatible with `flat` option) | `undefined` |
 

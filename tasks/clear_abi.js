@@ -34,6 +34,7 @@ subtask(
   'path', 'path to look for ABIs', undefined, types.string
 ).setAction(async function (args, hre) {
   const outputDirectory = path.resolve(hre.config.paths.root, args.path);
+  const outputExtension = args.format === 'typescript' ? '.ts' : '.json';
 
   if (!fs.existsSync(outputDirectory)) {
     return;
@@ -42,7 +43,7 @@ subtask(
   const files = readdirRecursive(outputDirectory);
 
   await Promise.all(files.map(async function (file) {
-    if (path.extname(file) !== '.json') {
+    if (path.extname(file) !== outputExtension) {
       // ABIs must be stored as JSON
       return;
     }

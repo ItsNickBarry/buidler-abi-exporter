@@ -54,14 +54,15 @@ subtask(
       abi = new Interface(abi).format(FormatTypes.minimal);
     } else if (config.format == 'fullName') {
       abi = new Interface(abi).format(FormatTypes.fullName);
-    } else if (config.format != 'json') {
+    } else if (config.format != 'json' && config.format !== 'typescript') {
       throw new HardhatPluginError(`Unknown format: ${config.format}`);
     }
 
+    const extension = config.format === 'typescript' ? '.ts' : '.json';
     const destination = path.resolve(
       outputDirectory,
       config.rename(sourceName, contractName)
-    ) + '.json';
+    ) + extension;
 
     outputData.push({ abi, destination });
   }));
@@ -82,7 +83,10 @@ subtask(
   }
 
   await Promise.all(outputData.map(async function ({ abi, destination }) {
+    let output = JSON.stringify(abi, null, config.spacing);
+    if (config.format === 'typescript') output = `export default ${output} as const;`;
+
     await fs.promises.mkdir(path.dirname(destination), { recursive: true });
-    await fs.promises.writeFile(destination, `${JSON.stringify(abi, null, config.spacing)}\n`, { flag: 'w' });
+    await fs.promises.writeFile(destination, output, { flag: 'w' });
   }));
 });
