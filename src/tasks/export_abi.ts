@@ -1,5 +1,6 @@
 import { name as pluginName } from '../../package.json';
 import { AbiExporterConfigEntry } from '../index';
+import { abiToTs } from './utils';
 import { Interface, FormatTypes } from '@ethersproject/abi';
 import fs from 'fs';
 import { TASK_COMPILE } from 'hardhat/builtin-tasks/task-names';
@@ -78,11 +79,10 @@ subtask('export-abi-group')
           );
         }
 
-        const destination =
-          path.resolve(
-            outputDirectory,
-            config.rename(sourceName, contractName),
-          ) + '.json';
+        const destination = path.resolve(
+          outputDirectory,
+          config.rename(sourceName, contractName),
+        );
 
         outputData.push({ abi, destination });
       }),
@@ -112,11 +112,20 @@ subtask('export-abi-group')
     await Promise.all(
       outputData.map(async ({ abi, destination }) => {
         await fs.promises.mkdir(path.dirname(destination), { recursive: true });
-        await fs.promises.writeFile(
-          destination,
-          `${JSON.stringify(abi, null, config.spacing)}\n`,
-          { flag: 'w' },
-        );
+        const outputJson = JSON.stringify(abi, null, config.spacing);
+        await fs.promises.writeFile(`${destination}.json`, `${outputJson}\n`, {
+          flag: 'w',
+        });
+
+        if (config.tsWrapper) {
+          await fs.promises.writeFile(
+            `${destination}.ts`,
+            abiToTs(outputJson),
+            {
+              flag: 'w',
+            },
+          );
+        }
       }),
     );
   });

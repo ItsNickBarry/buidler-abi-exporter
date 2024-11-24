@@ -22,19 +22,20 @@ require('hardhat-abi-exporter');
 
 Add configuration under the `abiExporter` key:
 
-| option         | description                                                                                                                                                  | default      |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
-| `path`         | path to ABI export directory (relative to Hardhat root)                                                                                                      | `'./abi'`    |
-| `runOnCompile` | whether to automatically export ABIs during compilation                                                                                                      | `false`      |
-| `clear`        | whether to delete old ABI files in `path` on compilation                                                                                                     | `false`      |
-| `flat`         | whether to flatten output directory (may cause name collisions)                                                                                              | `false`      |
-| `only`         | `Array` of `String` matchers used to select included contracts, defaults to all contracts if `length` is 0                                                   | `[]`         |
-| `except`       | `Array` of `String` matchers used to exclude contracts                                                                                                       | `[]`         |
-| `spacing`      | number of spaces per indentation level of formatted output                                                                                                   | `2`          |
-| `pretty`       | whether to use interface-style formatting of output for better readability                                                                                   | `false`      |
-| `format`       | format type ("json", "minimal", "fullName"). Alternative to `pretty`                                                                                         | `json`       |
-| `filter`       | `Function` with signature `(abiElement: any, index: number, abi: any, fullyQualifiedName: string) => boolean` used to filter elements from each exported ABI | `() => true` |
-| `rename`       | `Function` with signature `(sourceName: string, contractName: string) => string` used to rename an exported ABI (incompatible with `flat` option)            | `undefined`  |
+| option         | description                                                                                                                                                   | default      |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| `path`         | path to ABI export directory (relative to Hardhat root)                                                                                                       | `'./abi'`    |
+| `runOnCompile` | whether to automatically export ABIs during compilation                                                                                                       | `false`      |
+| `clear`        | whether to delete old ABI files in `path` on compilation                                                                                                      | `false`      |
+| `flat`         | whether to flatten output directory (may cause name collisions)                                                                                               | `false`      |
+| `tsWrapper`    | wraps JSON in TS (sidestep with [this issue](https://github.com/microsoft/TypeScript/issues/32063) to give better [viem](https://viem.sh/docs) compatibility) | `false`      |
+| `only`         | `Array` of `String` matchers used to select included contracts, defaults to all contracts if `length` is 0                                                    | `[]`         |
+| `except`       | `Array` of `String` matchers used to exclude contracts                                                                                                        | `[]`         |
+| `spacing`      | number of spaces per indentation level of formatted output                                                                                                    | `2`          |
+| `pretty`       | whether to use interface-style formatting of output for better readability                                                                                    | `false`      |
+| `format`       | format type ("json", "minimal", "fullName"). Alternative to `pretty`                                                                                          | `json`       |
+| `filter`       | `Function` with signature `(abiElement: any, index: number, abi: any, fullyQualifiedName: string) => boolean` used to filter elements from each exported ABI  | `() => true` |
+| `rename`       | `Function` with signature `(sourceName: string, contractName: string) => string` used to rename an exported ABI (incompatible with `flat` option)             | `undefined`  |
 
 Note that the configuration formatted as either a single `Object`, or an `Array` of objects. An `Array` may be used to specify multiple outputs.
 

@@ -12,6 +12,7 @@ interface AbiExporterUserConfigEntry {
   runOnCompile?: boolean;
   clear?: boolean;
   flat?: boolean;
+  tsWrapper?: boolean;
   only?: string[];
   except?: string[];
   spacing?: number;
@@ -31,6 +32,7 @@ export interface AbiExporterConfigEntry {
   runOnCompile: boolean;
   clear: boolean;
   flat: boolean;
+  tsWrapper: boolean;
   only: string[];
   except: string[];
   spacing: number;
@@ -60,6 +62,7 @@ const DEFAULT_CONFIG = {
   runOnCompile: false,
   clear: false,
   flat: false,
+  tsWrapper: false,
   only: [],
   except: [],
   spacing: 2,
