@@ -3,8 +3,5 @@
   "singleQuote": true,
   "trailingComma": "all",
   "bracketSpacing": true,
-  "plugins": [
-    "prettier-plugin-solidity",
-    "@trivago/prettier-plugin-sort-imports"
-  ]
+  "plugins": ["prettier-plugin-solidity", "@ianvs/prettier-plugin-sort-imports"]
 }
